@@ -1,2 +1,2 @@
-# grid
-# grid
+This is network grid design document
+
