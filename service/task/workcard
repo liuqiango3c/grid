@@ -1,4 +1,5 @@
-#派单服务
+#name:workcard
+#lable:派单服务
 1.启动派单服务                GET    task/workcard/start   
 2.停止派单服务                GET    task/workcard/stop
 3.配置派单服务                GET    task/workcard/config
@@ -8,6 +9,27 @@
 7.获取派单目标区域统计列表     GET    task/workcard/statistics/domain/{domain}   //精确到人，精确到网格，精确到网格组，精确到大区，模糊到网格组，模糊到大区，全网模糊。
 8.获取派单类型统计列表         GET    task/workcard/statistics/dispatch/when?/{when}   // 参考“工单派发类型”
 
+#config
+{
+   "tasks":{
+      “type”： “rest”,
+      “access”： “http://ip:port/workcards/next”,  //通过接口获取下一个待派工作单。
+      “target”：[
+                “http://ip:port/workers/{assign|grabe}/{workcardid}/”,
+                “http://ip:port/grids/{assign|grabe}/{workcardid}/”,
+                “http://ip:port/groups/{assign|grabe}/{workcardid}/”,
+                “http://ip:port/areas/{assign|grabe}/{workcardid}/”
+      ]  //一组获取派发目标URI的方法，顺序获取派发目标URI，直到成功获取并派发。
+   }, //待派队列
+
+}
+
+#target:return
+{
+     href:"http://ip:port/worker/{workerid}/assign/{workcardid}"
+     //以下可选
+     //href:"http://ip:port/worker/{workerid}/grabe/{workcardid}"
+}
 说明
 1.派单服务一旦启动，从配置的任务队列里获取需要派发的工单；
 2.根据最小匹配反向优先原则，先匹配网格人员，其次网格，其次网格组，其次大区，其次全网方式逐级派发。先匹配即可停止派发。具体实现逻辑为：
