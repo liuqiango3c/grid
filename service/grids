@@ -1,4 +1,4 @@
-服务约定
+服务约定s
 服务类型区分通过authority区分 http://grid.xxx.xxx/
 大型客户，组织通过authority区分，http://grid.gs.xxx.xxx/
 小型客户，组织通过（路径？查询区分）区分，比如   http://grid.xxx.xxx/gs/
