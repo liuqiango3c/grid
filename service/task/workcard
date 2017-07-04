@@ -1,7 +1,4 @@
-
-一、派单服务（任务服务）：基于工单管理列表，自动完成派单服务
-
-派单管理
+#派单服务
 1.启动派单服务                GET    task/workcard/start   
 2.停止派单服务                GET    task/workcard/stop
 3.配置派单服务                GET    task/workcard/config
