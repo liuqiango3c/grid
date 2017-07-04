@@ -122,23 +122,23 @@
 网格人员审核更新离开指定网格分组     GET     group/{id}/review/leave/workers/update
 
 网格管理
-获取指定网格信息                    GET    grid/{id}
+获取指定网格信息                    GET     grid/{id}
 获取指定网格基本信息                GET     grid/{id}/profile
 获取指定网格负责人                  GET     grid/{id}/owners
 获取指定网格事迹                    GET     grid/{id}/events  
 获取指定网格奖项                    GET     grid/{id}/awards 
-获取指定网格的所属分组               GET     grid/{id}/assigned/groups
-获取指定网格的参与分组               GET     grid/{id}/joining/groups
-获取指定网格的网格人员               GET     grid/{id}/workers?status={[online | offline ]}  //网格人员的在线状态通过查询（QUERY）status状态实现。
-获取指定网格被指派工单               GET     grid/{id}/workcards
-添加更新指定网格网格人员             POST    grid/{id}/workers/{+workers id}
-添加更新指定网格被指派工单           POST    grid/{id}/workcards/{+workcards id }
+获取指定网格的所属分组              GET      grid/{id}/assigned/groups
+获取指定网格的参与分组              GET      grid/{id}/joining/groups
+获取指定网格的网格人员              GET      grid/{id}/workers?status={[online | offline ]}  //网格人员的在线状态通过查询（QUERY）status状态实现。
+获取指定网格被指派工单              GET      grid/{id}/workcards
+添加更新指定网格网格人员            POST      grid/{id}/workers/{+workers id}
+添加更新指定网格被指派工单          POST      grid/{id}/workcards/{+workcards id }
 删除指定网格网格人员                DELETE   grid/{id}/workers/{+workers id}
 删除指定网格被指派工单              DELETE   grid/{id}/workcards/{+workcards id }
-获取指定网格动态网格人员             GET      grid/{id}/joined/workers
-获取指定网格历史所属分组变迁         GET      grid/{id}/history/assigned/groups
-获取指定网格历史参与分组变迁         GET      grid/{id}/history/joining/groups
-获取指定网格历史被指派工单           GET      grid/{id}/history/workcards/{+workcards id}
+获取指定网格动态网格人员            GET       grid/{id}/joined/workers
+获取指定网格历史所属分组变迁        GET       grid/{id}/history/assigned/groups
+获取指定网格历史参与分组变迁        GET       grid/{id}/history/joining/groups
+获取指定网格历史被指派工单          GET       grid/{id}/history/workcards/{+workcards id}
 
 网格工作流（申请加入、离开；审核同意、拒绝、更新）
 网格人员申请加入指定网格             GET      grid/{id}/apply/join/workers/{+workers id}    
@@ -178,11 +178,11 @@
 获取指定网格人员的指定工单           GET     worker/{id}/workcards/{from}/{type}/{status}/{commit1}/{commit2}  //或者指定网格人员的：指定来源，指定类型，指定状态，用户评价，装维评价工单
 获取指定网格人员的指定派发类型工单    GET     worker/{id}/workcards/from/{from}/        // 参考网格人员工单派发类型
 获取指定网格人员的指定处理类型工单    GET     worker/{id}/workcards/type/{type}/        // 参考网格人员工单处理类型
-获取指定网格人员的指定工作态工单      GET   worker/{id}/workcards/status/{status}      //参考工单执行态， 获取指定网格人员指定执行状态的工单
-获取指定网格人员的指定装维评价态工单  GET   worker/{id}/workcards/comment/worker/{status}        // 参考 工单评价状态
-获取指定网格人员的指定用户评价态工单  GET   worker/{id}/workcards/comment/subscriber/{status}   // 参考 工单评价状态
-添加、更新指定网格人员设置可用时间    POST      worker/{id}/joining/timeslots/{timeslot}
-添加常用转单人                      POST      worker/{id}/forwarder/{workerid}
-删除常用转单人                      DELETE   worker/{id}/forwarder/{workerid}
-工作流—网格人员申请下线                     GET   workers/{id}/apply/offline
-工作流—网格人员申请上线                     GET   workers/{id}/apply/online
+获取指定网格人员的指定工作态工单      GET     worker/{id}/workcards/status/{status}      //参考工单执行态， 获取指定网格人员指定执行状态的工单
+获取指定网格人员的指定装维评价态工单  GET     worker/{id}/workcards/comment/worker/{status}        // 参考 工单评价状态
+获取指定网格人员的指定用户评价态工单  GET     worker/{id}/workcards/comment/subscriber/{status}   // 参考 工单评价状态
+添加、更新指定网格人员设置可用时间    POST    worker/{id}/joining/timeslots/{timeslot}
+添加常用转单人                      POST    worker/{id}/forwarder/{workerid}
+删除常用转单人                      DELETE  worker/{id}/forwarder/{workerid}
+工作流—网格人员申请下线              GET     workers/{id}/apply/offline
+工作流—网格人员申请上线              GET     workers/{id}/apply/online
