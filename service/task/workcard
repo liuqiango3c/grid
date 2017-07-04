@@ -2,14 +2,14 @@
 一、派单服务（任务服务）：基于工单管理列表，自动完成派单服务
 
 派单管理
-1.启动派单服务                GET    workcard/task/{id}/start    //是否与工单管理合并到一个服务，可以考虑！ (id=派单服务！)
-2.停止派单服务                GET    workcard/task/{id}/stop
-3.配置派单服务                GET    workcard/task/{id}/config
-4.获取派单日期时间统计列表     GET    workcard/task/{id}/statistics/datetime/{year}/{month}/{date}/{time}
-5.获取派单方式统计列表         GET    workcard/task/{id}/statistics/mode/{mode}     // 指定派单，还是抢单（模糊）
-6.获取派单反馈速度统计列表     GET    workcard/task/{id}/statistics/feedback/{time}  //多久时间内反馈进行统计。1分钟，15分钟，30分钟，1小时，8小时，12小时，24小时，等等。
-7.获取派单目标区域统计列表     GET    workcard/task/{id}/statistics/domain/{domain}   //精确到人，精确到网格，精确到网格组，精确到大区，模糊到网格组，模糊到大区，全网模糊。
-8.获取派单类型统计列表         GET    workcard/task/{id}/statistics/dispatch/when?/{when}   // 参考“工单派发类型”
+1.启动派单服务                GET    task/workcard/start   
+2.停止派单服务                GET    task/workcard/stop
+3.配置派单服务                GET    task/workcard/config
+4.获取派单日期时间统计列表     GET    task/workcard/statistics/datetime/{year}/{month}/{date}/{time}
+5.获取派单方式统计列表         GET    task/workcard/statistics/mode/{mode}     // 指定派单，还是抢单（模糊）
+6.获取派单反馈速度统计列表     GET    task/workcard/statistics/feedback/{time}  //多久时间内反馈进行统计。1分钟，15分钟，30分钟，1小时，8小时，12小时，24小时，等等。
+7.获取派单目标区域统计列表     GET    task/workcard/statistics/domain/{domain}   //精确到人，精确到网格，精确到网格组，精确到大区，模糊到网格组，模糊到大区，全网模糊。
+8.获取派单类型统计列表         GET    task/workcard/statistics/dispatch/when?/{when}   // 参考“工单派发类型”
 
 说明
 1.派单服务一旦启动，从配置的任务队列里获取需要派发的工单；
@@ -21,3 +21,5 @@
   2.5特例：如果工单指定了装维人员，则首先直接匹配网格人员；
 3.所有的派发工单，需要被派发者确认视为派发成功，否则按照自动重发策略，定期重发；
 4.工单优先级策略：根据订单，工单等信息，自动计算出工单优先的算法。
+ //是否与工单管理合并到一个服务，可以考虑！ (id=派单服务！)
+
