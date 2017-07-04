@@ -1,3 +1,40 @@
+服务约定:
+服务类型区分通过authority区分，http://grid.xxx.xxx/
+大型客户，组织通过authority区分，http://grid.gs.xxx.xxx/
+小型客户，组织通过（路径？查询区分）区分，比如http://grid.xxx.xxx/gs/
+
+备注：
+工作流动作
+apply: leave, join， online, offline  (业务相关动作)
+review: approve, reject, update， suspend， postpone  (业务无关)
+
+工作流节点状态
+review后状态： approved, rejected,updated， postponed
+review前状态： approving,  pending
+
+一、派单服务（任务服务）：基于工单管理列表，自动完成派单服务
+
+派单管理
+1.启动派单服务                GET    workcard/task/{id}/start    //是否与工单管理合并到一个服务，可以考虑！ (id=派单服务！)
+2.停止派单服务                GET    workcard/task/{id}/stop
+3.配置派单服务                GET    workcard/task/{id}/config
+4.获取派单日期时间统计列表     GET    workcard/task/{id}/statistics/datetime/{year}/{month}/{date}/{time}
+5.获取派单方式统计列表         GET    workcard/task/{id}/statistics/mode/{mode}     // 指定派单，还是抢单（模糊）
+6.获取派单反馈速度统计列表     GET    workcard/task/{id}/statistics/feedback/{time}  //多久时间内反馈进行统计。1分钟，15分钟，30分钟，1小时，8小时，12小时，24小时，等等。
+7.获取派单目标区域统计列表     GET    workcard/task/{id}/statistics/domain/{domain}   //精确到人，精确到网格，精确到网格组，精确到大区，模糊到网格组，模糊到大区，全网模糊。
+8.获取派单类型统计列表         GET    workcard/task/{id}/statistics/dispatch/when?/{when}   // 参考“工单派发类型”
+
+说明
+1.派单服务一旦启动，从配置的任务队列里获取需要派发的工单；
+2.根据最小匹配反向优先原则，先匹配网格人员，其次网格，其次网格组，其次大区，其次全网方式逐级派发。先匹配即可停止派发。具体实现逻辑为：
+  2.1先利用工单信息匹配大区，如果不能匹配大区，则分派到手工处理（必选）（替代方案是：分发所有大区进行抢单？业务确定）
+  2.2大区匹配完成，进行网格分组匹配（可选），同上
+  2.3大区/网格分组匹配完成，进行网格匹配（必选），如果匹配网格，下一步。否则网格分组或者大区内抢单模式分发，或者根据配置发到大区派单表，由大区手工处理
+  2.4网格匹配后，进行装维人员匹配。如果有匹配，直接派发。否则，在网格内抢单模式分发
+  2.5特例：如果工单指定了装维人员，则首先直接匹配网格人员；
+3.所有的派发工单，需要被派发者确认视为派发成功，否则按照自动重发策略，定期重发；
+4.工单优先级策略：根据订单，工单等信息，自动计算出工单优先的算法。
+
 二、工单管理（实体服务）
 
 关键词
@@ -55,8 +92,231 @@
   5.5装维人员服务意愿匹配 (来自意愿) （软性匹配）
   5.6工单所属区域的指定网格组、网格、网格人员还是外部动态加入的
   
+工单管理
+1.获取工单列表                        GET     workcards
+2.获取指定来源的工单列表               GET     workcards/where/{where}            // 参考工单来源
+3.获取指定优先级工单列表               GET     workcards/priority/{priority}     // 参考派单优先级
+4.获取指定派发时间要求工单列表         GET     workcards/dispatch/when？/{when}     // 参考工单派发类型：
+5.获取指定派发状态工单列表             GET     workcards/dispatch/status/{status}    //参考工单派发状态
+6.获取指定时间工单列表                 GET     workcards/datetime/{year}/{month}/{date}/{time}
+7.获取指定日期工单列表                 GET     workcards/date/{year}/{month}/{date}
+8.获取指定地理位置附近工单列表          GET    workcards/geo/radius/{radius}
+9.获取指定工单位置相近工单列表          GET    workcards/geo/workcard/{workcardid}
+10.获取按时间日期工单统计信息           GET    workcards/statistic/time/{year}/{month}/{date}/{time}
+11.获取指定工单信息                    GET    workcard/{id}
+12.获取指定工单派单优先级               GET    workcard/{id}/priority
+13.获取指定工单派单类型                 GET    workcard/{id}/when
+14.获取指定工单派单过程相关信息         GET    workcard/{id}/dispatch
+15.获取指定工单执行过程相关信息         GET    workcard/{id}/process
+16.获取指定工单用户对装维评价相关信息    GET    workcard/{id}/comments   //用户对本工单的执行评价。对用户的评价属于用户服务维护。
+17.获取指定工单订户相关信息             GET    workcard/{id}/subscriber  //获取指定工单的订户信息
+18.获取指定工单订单相关信息             GET     workcard/{id}/order         //获取指定工单的订单信息
+19.更新指定工单                        POST   workcard/{id}     //比如派发时间，优先级，预约时间，工单process状态，地理位置信息细化，特殊要求等等
+20.设置指定工单派单优先级               POST   workcard/{id}/priority     //参考工单优先级
+21.对指定工单进行评价                   POST   workcard/{id}/comment   //订户侧调用该服务对工单服务评价。
+22.对指定派单进行反馈                   POST   workcard/{id}/dispatch/feedback   //装维人员接收工单并反馈确认后视为派单成功，否则参考工单重派算法 重新派发
+23.删除指定工单                        DELETE  workcard/{id}          //未派发的人工编辑工单可以删除，其它工单不可以删除。
+24.删除用户对指定工单的评价             DELETE  workcard/{id}/comment
+25.工作流-取消指定工单                  DELETE  workcard/{id}          //订单一旦派发，必须通过工作流进行取消或者删除，不能直接删除。
+26.工作流-新建工单                      POST   workcard                   //订单系统自动调用本方法产生新工单，获取人工干预生成新工单。关键字段：来源，时间，订单ID，特殊要求
+27.工作流-作废某次派单                  POST   workcard/{id}/dispatch/pivot/{type}/{domain}  //将某次派单作废。如果该工单已经被接收，则需要通知相关人等作废？
+28.工作流-派发指定工单                  POST   workcard/{id}/dispatch/{mode}/{domain}     // 参考工单派单模式与工单派单域， 调用地区，组，网格，人员服务接口，将该工单派发出去。
 
+三、网格管理（实体服务）
 
+网格管理的角色
+1.分区管理：可以对一个组织内部进行分区的设置，分组的设置，网格、网格人员的设置，并支持期间的组织关系配置。
+2.大区经理：可以对大区内部执行分区管理的角色权限
+3.网格组长：可以网格分组内部做相关的管理配置
+4.网格经理：可以网格内部做相关的管理配置
+5.装维人员：可以对自己负责的进行配置管理
+6.订户角色：订户除对工单反馈还可以做什么？
+7.派单服务角色：？？ 
+
+分区管理  （大区ID,名称，别名，LOGO, 地理范围（GEO），负责人获取？）
+1.获取大区列表                          GET           areas
+2.获取指定大区信息                    GET           area/{id}                //需要细化， 记录大区的业务相关信息。以各类统计数据为主，比如多少组，多个网格，多少个人员，工单执行统计等等。
+3.获取指定大区基本信息              GET           area/{id}/profile
+4.获取指定大区负责人               GET           area/{id}/owners      //区内能否改负责人？如果不能，被其它服务调用修改， 指向员工ID
+5.添加大区                                POST          area  
+6.更新指定大区                           POST          area/{id}
+7.删除指定大区                          DELETE        area/{id}
+8.更新指定大区基本信息               POST          area/{id}/profile
+9.添加指定大区负责人                  POST          area/{id}/owner/{owner id}
+10.更新指定大区负责人                  POST          area/{id}/owner/{owner id}   //引用型关系，需要全部更新。无编辑信息。 如果是一个负责人，则可以更新
+11.删除指定大区指定负责人            DELETE       area/{id}/owner/{owner id}
+12.获取指定大区事迹                     GET            area/{id}/events    //大区哪些事迹
+13.获取指定大区奖项                     GET            area/{id}/awards     //大区哪些奖项
+14.添加指定大区事迹                     POST          area/{id}/event
+15.添加指定大区奖项                     POST          area/{id}/award
+16.更新指定大区事迹                     POST          area/{id}/event/{evendid}
+17.更新指定大区奖项                     POST          area/{id}/award/{awardid}
+18.删除指定大区指定事迹               DELETE       area/{id}/event/{eventid}
+19.删除指定大区指定奖项               DELETE       area/{id}/award/{awardid}
+
+20.获取指定大区的指定网格分组       GET           area/{id}/assigned/groups       //初始的划分
+21.获取指定大区的指定网格             GET           area/{id}/assigned/grids
+22.获取指定大区的指定网格人员       GET           area/{id}/assigned/workers
+23.更新指定大区全部分组               POST          area/{id}/assigned/groups/  //一次性更新指定大区指定的全部分组 ， 数据POST过来？
+24.更新指定大区全部网格               POST          area/{id}/assigned/grids/       //一次性更新指定大区指定的全部网格
+25.更新指定大区全部网格人员         POST          area/{id}/assigned/workers/  //一次性更新指定大区指定的全部网格人员
+26.添加指定大区指定分组               POST          area/{id}/assigned/group/{groupid}    
+27.添加指定大区指定网格               POST          area/{id}/assigned/grid/{gridid}          
+28.添加指定大区指定网格人员         POST          area/{id}/assigned/worker/{workerid}
+29.删除指定大区指定分组              DELETE       area/{id}/assigned/group/{groupid}          
+30.删除指定大区指定网格              DELETE       area/{id}/assigned/grid/{gridid}        
+31.删除指定大区指定网格人员         DELETE       area/{id}/assigned/worker/{workerid}
+
+32.获取指定大区动态网格分组        GET            area/{id}/joined/groups   //自由加入功能打开时，人员，网格可以自由选择区域时候有效
+33.获取指定大区动态网格              GET            area/{id}/joined/grids
+34.获取指定大区动态网格人员        GET            area/{id}/joined/workers                              
+35.删除指定大区动态分组              DELETE       area/{id}/joined/group/{groupid}                //这些功能有合理性，区长可以强制将不合理的分组踢掉。
+36.删除指定大区动态网格              DELETE       area/{id}/joined/grid/{gridid}        
+37.删除指定大区动态网格人员          DELETE    area/{id}/joined/worker/{workerid}
+
+38.获取指定大区被指派工单            GET      area/{id}/workcards/    //据此大区负责人可以派发给网格组，网格，或者网格人员。包括工单的各种状态。
+39.添加更新指定大区被指派工单        POST     area/{id}/workcard/{+workcards id }  //该方法添加的工单被区长进行处理或者指派。比如自动派单无法定位网格的，但是可能能定义区域 低优先级
+40.删除指定大区被指派工单            DELETE   area/{id}/workcard/{+workcards id}  //该方法添加的工单被区长进行处理或者指派。比如自动派单无法定位网格的，但是可能能定义区域  低优先级
+41.获取指定大区事迹变迁              GET      area/{id}/history/events
+42.获取指定大区奖项变迁              GET      area/{id}/history/awards
+43.获取指定大区历史负责人变迁         GET     area/{id}/history/owners
+44.获取指定大区历史指定网格分组变迁   GET      area/{id}/history/assigned/groups
+45.获取指定大区历史指定网格变迁       GET      area/{id}/history/assigned/grids
+46.获取指定大区历史指定网格人员变迁   GET      area/{id}/history/assigned/workers
+47.获取指定大区历史动态网格分组变迁   GET      area/{id}/history/joined/groups
+48.获取指定大区历史动态网格变迁       GET      area/{id}/history/joined/grids
+49.获取指定大区历史动态网格人员变迁   GET      area/{id}/history/joined/workers
+
+备注
+分区添加分组，网格，人员的功能表明：分区经理的控制能力与权限，这时候，操作结果应该保存在分区管理部分。
+
+大区管理工作流（申请加入、离开；审核同意、拒绝、更新）
+网格分组申请加入指定大区           GET      area/{id}/apply/join/groups/{+groups id}   
+网格申请加入指定大区                 GET      area/{id}/apply/join/grids/{+grids id}
+网格人员申请加入指定大区           GET      area/{id}/apply/join/workers/{+workers id}
+网格分组申请离开指定大区           GET      area/{id}/apply/leave/groups/{+groups id}
+网格申请离开指定大区                 GET      area/{id}/apply/leave/grids/{+grids id}
+网格人员申请离开指定大区           GET      area/{id}/apply/leave/workers/{+workers id}
+网格分组审核同意加入指定大区      GET      area/{id}/review/join/groups/approve
+网格分组审核拒绝加入指定大区      GET      area/{id}/review/join/groups/reject
+网格分组审核更新加入指定大区      GET      area/{id}/review/join/groups/update
+网格审核同意加入指定大区            GET      area/{id}/review/join/grids/approve
+网格审核拒绝加入指定大区            GET      area/{id}/review/join/grids/reject
+网格审核更新加入指定大区            GET      area/{id}/review/join/grids/update
+网格人员审核同意加入指定大区      GET      area/{id}/review/join/workers/approve
+网格人员审核拒绝加入指定大区      GET      area/{id}/review/join/workers/reject
+网格人员审核更新加入指定大区      GET       area/{id}/review/join/workers/update
+网格分组审核同意离开指定大区      GET       area/{id}/review/leave/groups/approve
+网格分组审核拒绝离开指定大区      GET       area/{id}/review/leave/groups/reject
+网格分组审核更新离开指定大区      GET       area/{id}/review/leave/groups/update  
+网格审核同意离开指定大区            GET       area/{id}/review/leave/grids/approve
+网格审核拒绝离开指定大区             GET      area/{id}/review/leave/grids/reject
+网格审核更新离开指定大区             GET      area/{id}/review/leave/grids/update
+网格人员审核同意离开指定大区       GET      area/{id}/review/leave/workers/approve
+网格人员审核拒绝离开指定大区       GET      area/{id}/review/leave/workers/reject
+网格人员审核更新离开指定大区      GET      area/{id}/review/leave/workers/update
+
+网格分组管理
+获取指定网格分组信息                       GET       group/{id}
+获取指定网格分组基本信息                  GET       group/{id}/profile
+获取指定网格分组的负责人                  GET       group/{id}/owners
+获取指定网格分组事迹                         GET      group/{id}/events   //分组哪些事迹
+获取指定网格分组奖项                         GET      group/{id}/awards    //分组哪些奖项
+获取指定网格分组的所属区域                GET       group/{id}/assigned/areas
+获取指定网格分组的参与区域                GET       group/{id}/joining/areas
+获取指定网格分组网格                         GET       group/{id}/grids
+获取指定网格分组网格人员                   GET       group/{id}/workers
+获取指定网格分组被指派工单                 GET       group/{id}/workcards
+添加更新指定网格分组网格                    POST     group/{id}/grids/{+grids id}
+添加更新指定网格分组网格人员              POST      group/{id}/workers/{+workers id}
+添加更新指定网格分组被指派工单           POST      group/{id}/workcards/{+workcards id }
+删除指定网格分组网格                         DELETE   group/{id}/grids/{+grids id}  
+删除指定网格分组网格人员                   DELETE   group/{id}/workers/{+workers id}
+删除指定网格分组被指派工单                DELETE   group/{id}/workcards/{+workcards id}
+获取指定网格分组动态网格                   GET        group/{id}/joined/grids
+获取指定网格分组动态网格人员             GET        group/{id}/history/workcards/{+workcards id}
+网格分组工作流（申请加入、离开；审核同意、拒绝、更新）
+网格申请加入指定网格分组                  GET     group/{id}/apply/join/grids/{+grids id}
+网格人员申请加入指定网格分组            GET     group/{id}/apply/join/workers/{+workers id}
+网格申请离开指定网格分组                  GET     group/{id}/apply/leave/grids/{+grids id}  
+网格人员申请离开指定网格分组            GET     group/{id}/apply/leave/workers/{+workers id}
+网格审核同意加入指定网格分组            GET     group/{id}/review/join/grids/approve
+网格审核拒绝加入指定网格分组            GET     group/{id}/review/join/grids/reject
+网格审核更新加入指定网格分组            GET     group/{id}/review/join/grids/update
+网格人员审核同意加入指定网格分组      GET     group/{id}/review/join/workers/approve
+网格人员审核拒绝加入指定网格分组      GET     group/{id}/review/join/workers/reject
+工网格人员审核更新加入指定网格分组   GET     group/{id}/review/join/workers/update
+网格审核同意离开指定网格分组           GET     group/{id}/review/leave/grids/approve  
+网格审核拒绝离开指定网格分组           GET     group/{id}/review/leave/grids/reject
+网格审核更新离开指定网格分组           GET     group/{id}/review/leave/grids/update
+网格人员审核同意离开指定网格分组     GET     group/{id}/review/leave/workers/approve
+网格人员审核拒绝离开指定网格分组     GET     group/{id}/review/leave/workers/reject
+网格人员审核更新离开指定网格分组     GET     group/{id}/review/leave/workers/update
+
+网格管理
+获取指定网格信息                        GET       grid/{id}
+获取指定网格基本信息                   GET       grid/{id}/profile
+获取指定网格负责人                      GET       grid/{id}/owners
+获取指定网格事迹                         GET       grid/{id}/events  
+获取指定网格奖项                         GET       grid/{id}/awards 
+获取指定网格的所属分组                GET       grid/{id}/assigned/groups
+获取指定网格的参与分组                GET       grid/{id}/joining/groups
+获取指定网格的网格人员                GET       grid/{id}/workers?status={[online | offline ]}  //网格人员的在线状态通过查询（QUERY）status状态实现。
+获取指定网格被指派工单                 GET      grid/{id}/workcards
+添加更新指定网格网格人员              POST      grid/{id}/workers/{+workers id}
+添加更新指定网格被指派工单           POST      grid/{id}/workcards/{+workcards id }
+删除指定网格网格人员                    DELETE   grid/{id}/workers/{+workers id}
+删除指定网格被指派工单                 DELETE   grid/{id}/workcards/{+workcards id }
+获取指定网格动态网格人员              GET       grid/{id}/joined/workers
+获取指定网格历史所属分组变迁        GET        grid/{id}/history/assigned/groups
+获取指定网格历史参与分组变迁        GET        grid/{id}/history/joining/groups
+获取指定网格历史被指派工单           GET        grid/{id}/history/workcards/{+workcards id}
+网格工作流（申请加入、离开；审核同意、拒绝、更新）
+网格人员申请加入指定网格               GET      grid/{id}/apply/join/workers/{+workers id}    
+网格人员申请离开指定网格               GET      grid/{id}/apply/leave/workers/{+workers id}
+网格人员审核同意加入指定网格         GET      grid/{id}/review/join/workers/approve
+网格人员审核拒绝加入指定网格         GET      grid/{id}/review/join/workers/reject
+网格人员审核更新加入指定网格         GET      grid/{id}/review/join/workers/update
+网格人员审核同意离开指定网格         GET      grid/{id}/review/leave/workers/approve
+网格人员审核拒绝离开指定网格         GET      grid/{id}/review/leave/workers/reject
+网格人员审核更新离开指定网格         GET      grid/{id}/review/leave/workers/update
+ 
+网格人员管理
+获取在线/下线网格人员                        GET    workers/status/{status}  //参考 网格人员在线状态
+获取指定工单可用网格人员              GET    workers/workcard/{workcard id}  //参考 工单网格人员匹配算法 
+获取指定网格人员明细信息              GET    worker/{id}
+获取指定网格人员基本信息               GET    worker/{id}/profile
+获取指定网格人员奖项                     GET    worker/{id}/awards
+获取指定网格人员事迹                     GET    worker/{id}/events
+获取指定网格人员状态                    GET    worker/{id}/status
+获取指定网格人员绩效明细               GET     worker/{id}/kpi
+获取指定网格人员被评价内容列表      GET     worker/{id}/comments/by
+获取指定网格人员发出评价内容列表   GET     worker/{id}/comments/out
+获取指定网格人员排单表                  GET    worker/{id}/schedules                       //获取指定人员的排单计划表
+获取指定网格人员转单人列表            GET    worker/{id}/forwarders                     //指向本表自身
+获取指定网格人员佣金金额               GET    worker/{id}/revenues  
+获取指定网格人员发展订户列表         GET    worker/{id}/market/subscribers/  
+获取指定网格人员发展订单列表         GET    worker/{id}/market/orders/
+获取指定网格人员的所属区域             GET    worker/{id}/assigned/areas
+获取指定网格人员的所属分组             GET    worker/{id}/assigned/groups
+获取指定网格人员的所属网格             GET    worker/{id}/assigned/grids
+获取指定网格人员分配时间槽             GET    worker/{id}/assigned/timeslots         //细粒度实现需要。延后实现。具体用法待定， timeslots 用词不够精确，需要细化
+获取指定网格人员参与区域                GET    worker/{id}/joining/areas
+获取指定网格人员参与分组                GET    worker/{id}/joining/groups
+获取指定网格人员参与网格                 GET    worker/{id}/joining/grids
+获取指定网格人员参与时间槽               GET    worker/{id}/joining/timeslots             //细粒度实现需要。延后实现。具体用法待定， timeslots 用词不够精确，需要细化
+获取指定网格人员的全部工单                GET    worker/{id}/workcards/
+获取指定网格人员的指定工单                GET    worker/{id}/workcards/{from}/{type}/{status}/{commit1}/{commit2}  //或者指定网格人员的：指定来源，指定类型，指定状态，用户评价，装维评价工单
+获取指定网格人员的指定派发类型工单     GET   worker/{id}/workcards/from/{from}/        // 参考网格人员工单派发类型
+获取指定网格人员的指定处理类型工单     GET    worker/{id}/workcards/type/{type}/        // 参考网格人员工单处理类型
+获取指定网格人员的指定工作态工单        GET   worker/{id}/workcards/status/{status}        //参考工单执行态， 获取指定网格人员指定执行状态的工单
+获取指定网格人员的指定装维评价态工单  GET   worker/{id}/workcards/comment/worker/{status}        // 参考 工单评价状态
+获取指定网格人员的指定用户评价态工单  GET   worker/{id}/workcards/comment/subscriber/{status}   // 参考 工单评价状态
+添加、更新指定网格人员设置可用时间       POST      worker/{id}/joining/timeslots/{timeslot}
+添加常用转单人                                    POST      worker/{id}/forwarder/{workerid}
+删除常用转单人                                    DELETE   worker/{id}/forwarder/{workerid}
+工作流—网格人员申请下线                     GET   workers/{id}/apply/offline
+工作流—网格人员申请上线                     GET   workers/{id}/apply/online
  网格搜索
 
 搜索大区                      GET     areas/{id=area}
