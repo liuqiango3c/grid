@@ -30,6 +30,7 @@ process： 工单执行状态    //当status为process时候，使用本值状�
 comments：工单订户评价数量
 retry： 派单重试次数
 granularity：工单派发粒度
+deadline: 工单必须被处理的时限 //如何计算需要工单限期算法
 when：工单派发类型
 mode: 工单派发模式
 priority:工单优先级
