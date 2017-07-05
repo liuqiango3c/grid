@@ -1,4 +1,8 @@
-地址实体
-工单实体
-装维实体
-网格实体
+分区实体(area)
+区域实体（region）
+工单实体(workcard)
+装维实体(worker)  <-- 雇员实体(employee)
+网格实体(grid)
+
+
+
