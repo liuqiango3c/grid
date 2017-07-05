@@ -5,7 +5,7 @@
 装维服务
 
 
-装维服务：
+网格人员服务：
 
 获取在线/下线网格人员                GET     workers/status/{status}  //参考 网格人员在线状态
 获取指定工单可用网格人员             GET     workers/workcard/{workcard id}  //参考 工单网格人员匹配算法 
