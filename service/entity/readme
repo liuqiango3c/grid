@@ -3,3 +3,42 @@
 工单服务
 网格服务
 装维服务
+
+
+装维服务：
+
+获取在线/下线网格人员                GET     workers/status/{status}  //参考 网格人员在线状态
+获取指定工单可用网格人员             GET     workers/workcard/{workcard id}  //参考 工单网格人员匹配算法 
+获取指定网格人员明细信息             GET     worker/{id}
+获取指定网格人员基本信息             GET     worker/{id}/profile
+获取指定网格人员奖项                 GET     worker/{id}/awards
+获取指定网格人员事迹                 GET     worker/{id}/events
+获取指定网格人员状态                 GET     worker/{id}/status
+获取指定网格人员绩效明细             GET     worker/{id}/kpi
+获取指定网格人员被评价内容列表        GET     worker/{id}/comments/by
+获取指定网格人员发出评价内容列表      GET     worker/{id}/comments/out
+获取指定网格人员排单表               GET     worker/{id}/schedules     //获取指定人员的排单计划表
+获取指定网格人员转单人列表           GET     worker/{id}/forwarders     //指向本表自身
+获取指定网格人员佣金金额             GET     worker/{id}/revenues  
+获取指定网格人员发展订户列表         GET     worker/{id}/market/subscribers/  
+获取指定网格人员发展订单列表         GET     worker/{id}/market/orders/
+获取指定网格人员的所属区域           GET     worker/{id}/assigned/areas
+获取指定网格人员的所属分组           GET     worker/{id}/assigned/groups
+获取指定网格人员的所属网格           GET     worker/{id}/assigned/grids
+获取指定网格人员分配时间槽           GET     worker/{id}/assigned/timeslots    //细粒度实现需要。延后实现。具体用法待定， timeslots 用词不够精确，需要细化
+获取指定网格人员参与区域             GET     worker/{id}/joining/areas
+获取指定网格人员参与分组             GET     worker/{id}/joining/groups
+获取指定网格人员参与网格             GET     worker/{id}/joining/grids
+获取指定网格人员参与时间槽           GET     worker/{id}/joining/timeslots      //细粒度实现需要。延后实现。具体用法待定， timeslots 用词不够精确，需要细化
+获取指定网格人员的全部工单           GET     worker/{id}/workcards/
+获取指定网格人员的指定工单           GET     worker/{id}/workcards/{from}/{type}/{status}/{commit1}/{commit2}  //或者指定网格人员的：指定来源，指定类型，指定状态，用户评价，装维评价工单
+获取指定网格人员的指定派发类型工单    GET     worker/{id}/workcards/from/{from}/        // 参考网格人员工单派发类型
+获取指定网格人员的指定处理类型工单    GET     worker/{id}/workcards/type/{type}/        // 参考网格人员工单处理类型
+获取指定网格人员的指定工作态工单      GET     worker/{id}/workcards/status/{status}      //参考工单执行态， 获取指定网格人员指定执行状态的工单
+获取指定网格人员的指定装维评价态工单  GET     worker/{id}/workcards/comment/worker/{status}        // 参考 工单评价状态
+获取指定网格人员的指定用户评价态工单  GET     worker/{id}/workcards/comment/subscriber/{status}   // 参考 工单评价状态
+添加、更新指定网格人员设置可用时间    POST    worker/{id}/joining/timeslots/{timeslot}
+添加常用转单人                      POST    worker/{id}/forwarder/{workerid}
+删除常用转单人                      DELETE  worker/{id}/forwarder/{workerid}
+工作流—网格人员申请下线              GET     workers/{id}/apply/offline
+工作流—网格人员申请上线              GET     workers/{id}/apply/online
