@@ -1,1 +1,12 @@
-雇员排期表
+排期实体
+
+关键字段
+
+workerid
+timesheetid 
+year
+month
+day
+stime
+etime
+
