@@ -19,7 +19,8 @@ regions: 服务区域，用于与工单地区匹配
       assign：指定区域
       join：自选区域
 workcards： 网格被分派的工单      
-
+cdatetime:  建立时间
+udatetime： 更新时间
 
 网格的官方管理：
 
