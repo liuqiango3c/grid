@@ -4,5 +4,28 @@
 装维实体(worker)  <-- 雇员实体(employee)
 网格实体(grid)
 
+实体关系描述
+
+area     1:n    region
+area     1:n    grid
+area     1:n    worker
+area     1:n    workcard
+
+grid     1:n                region
+grid     1:n                worker
+grid     1:n                workcard
+grid     belongtomany       area
+
+worker   belongtomany       grid
+worker   belongtomany       area
+worker   1:n                workcard
+worker   belongtomany       region
+worker   1:1                employee
+
+#当一个工单以抢单模式派发多个目标时候，关系？
+workcard  belongtoone       grid
+workcard  belongtoone       worker
+workcard  belongtoone       area
+workcard  belongtoone       region
 
 
