@@ -1,3 +1,12 @@
 服务区实体
 
 关键字段
+regionid:服务区/区域编号
+district：服务区所在行政区
+subdistrict：服务区所在子行政区
+type：区域类型  nodal, belt, poly
+label:区域官名
+nickname：区域昵称
+pattern： 本区域匹配模式，满足模式匹配的，可以视为
+params：描述区域的其它参数（比如片状区域）
+
