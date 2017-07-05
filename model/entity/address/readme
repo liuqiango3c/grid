@@ -35,6 +35,19 @@
 5. 地标+地址：比如 重庆解放碑 XX单位
 6. 惯例+地址：比如 北京后海   XX单位 XXX
 
-
+地址编码信息
+address:{
+    district: 省市县区的编码                  //订单地址模式匹配确定district
+    subdistrict：乡镇街道/村组社区 的编码      //订单地址模式匹配确定subdistrict,可选
+    region:{                                 //订单地址进行点状区域匹配，带状匹配，片状匹配。
+         type:nodal //表示地址区域为点状区域，其它可选的为belt(带区区域)，poly(多边形区域，GEO)，org(组织名称)：
+         code:value //点状区域匹配的编码，获取小区，大楼名
+         params:{}  //
+     }
+    subregion:{ //不需要
+       
+    }
+    
+}
 
 
