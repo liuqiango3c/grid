@@ -7,13 +7,16 @@ logo:头像：工人的头像
 employeeid:雇员编号：与雇员系统对接身份识别使用
 events: 个人事迹
 awards: 个人奖项
-status: 在线状态
+status: 工作状态        //装维设置工作态
+   available: 可用                
+   vocation: 假期状态   
+online:是否在线，       //只要登陆即设置为在线 
 grids:
-     assign:指定网格
-     join:自选网格
+     assign:指定网格，需要记录指定每个网格的开始时间
+     join:自选网格，需要记录加入每个网格的开始时间
 regions:
-      assign:指定服务区： 除网格外的独立选择，可选
-      join:指定服务区： 除网格外的独立选择，可选
+      assign:指定服务区： 除网格外的独立选择，可选   需要记录指定每个服务区的开始时间
+      join:指定服务区： 除网格外的独立选择，可选     需要记录加入每个服务区的开始时间
 timesheets:
       assign:指定服务时间
       join：自选服务时间
@@ -21,5 +24,6 @@ schedules:工作计划表
 forwarders:转单人
 orders: 个人发展的订单，根据订单可以得到订户
 registers: 个人发展的客户端安装与登记用户
-
+cdatetime:  建立时间
+udatetime： 更新时间
 
