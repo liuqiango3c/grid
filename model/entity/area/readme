@@ -3,4 +3,17 @@
 关键字段
 
 areaid：大区编号，参考组织大区编号规范自动生成
+label:官名，显示用
+nickname：小名，口语用
+logo:     大区LOGO
+description: 简要介绍
+owners:     大区负责人 ， 指向workers实体? employees?
+events：    大区事迹
+awards：    大区奖项
+workcards： 大区被分派的工单，需要大区负责人分派
+workers:    大区的网格人员。
+grids:      大区的网格。
+regions:    大区服务区域，在区域配置表里维护关系。大区与region的映射关系不会出现重叠。
+cdatetime:  建立时间
+udatetime： 更新时间
 
