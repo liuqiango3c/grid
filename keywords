@@ -7,10 +7,28 @@
 6.网格（grid）：      多个服务小区的组合称为网格，网格可以顶部划分并指定服务区域（物理网格），也可以自己选择自己的服务区域（虚拟网格）。网格可以同时具备物理与虚拟网格属性。网格的分区属性可以为一个列表，可以选择district, subdistrict, area, subarea任意一个。
 7.网格分组（group）： 网格的标签属性，多个网格组成一个网格分组，一个网格可以属于多个分组，一个分组可以有多个网格。为可选，需要自己琢磨网格分组的意义究竟何在？
 8.工单编号(workcard_id)： 工单编号的规范需要定义，根据工单编号规范自动生成。
-9.工单优先级（priority）   ：根据工单优先级算法自动计算，也可以人工干预。0~5, 1最高，5最低，0置顶。同一优先级的工单，根据优先级设置时间先后排序。
-10.工单派发状态（dispatch）：new(新工单), grabing（抢单模式派发）, assigning（指定模式派发）      由派单服务维护。定义工单派发过程的各种状态
-11.工单派发反馈状态（feedback）： rejected（派发被拒绝）, assigned（成功派发）, grabed（被抢）  由派单服务维护。定义工单派发过程的各种状态
-12.工单执行状态（process）：grabing（可抢工单）, reserving(待预约)，reserved（已预约）,installed（已安装）。由工单服务接口维护状态？。
+9.工单状态（status）:根据逻辑可以判断工单的总状态， 与udatetime配合可以直到每种状态的到大时间？
+       new（新工单）, 
+       dispatch(派单中), //工单第一次被派发时候，设置本态
+       process（执行中）, //工单被成功派单后（dispatch 设置为grabed,assigned时候），设置本态
+       done(完成),       //工单完成的设置根据完成判决策略 
+       cancel(取消),     //工单被强制取消的时候，需要完成工作流，只有满足特定条件才能取消
+       suspend（挂起）。  //工单被强制挂起的时候，需要完成工作流，只有满足特定条件才能挂起
+       
+10.工单派单状态(dispatch)：//当status为dispatch时候，使用本值状态。
+       idle(未派), 
+       grabing（抢单模式派发）, 
+       assigning（指定模式派发），
+       assigned （已派单）, //派给指定人，已经接收
+       grabed （已派单）,   //派给抢单，已被抢
+       rejected（派发被拒绝）, 
+       expired,超时无反馈
+
+11.工单执行状态(process)：  //当status为process时候，使用本值状态。
+       reserving(待预约)，
+       reserved（已预约）,
+       scheduled(已计划)，
+       installed（已安装）
 13.工单评价状态(comment)：commented（已评价）, commenting(待评价), 工单评价接口负责本状态更新。
 14.工单发起方（startup）：  order(订单系统), editor（人工编辑），CRM（客服发起）
 15.工单派发类型（when）：  presentable(即时派发), bookable(预约派发),
