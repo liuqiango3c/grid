@@ -1,2 +1,2 @@
-This is network grid design document
+网格管理设计文档
 
