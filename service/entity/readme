@@ -1,11 +1,40 @@
 实体服务
 
-工单服务
-网格服务
-装维服务
+工单实体服务：workcards
+网格实体服务：grids
+网格装维实体服务：workers
+
+网格实体服务:grids
+获取指定网格信息                    GET     grid/{id}
+获取指定网格基本信息                GET     grid/{id}/profile
+获取指定网格负责人                  GET     grid/{id}/owners
+获取指定网格事迹                    GET     grid/{id}/events  
+获取指定网格奖项                    GET     grid/{id}/awards 
+获取指定网格的所属分组              GET      grid/{id}/assigned/groups
+获取指定网格的参与分组              GET      grid/{id}/joining/groups
+获取指定网格的网格人员              GET      grid/{id}/workers?status={[online | offline ]}  //网格人员的在线状态通过查询（QUERY）status状态实现。
+获取指定网格被指派工单              GET      grid/{id}/workcards
+添加更新指定网格网格人员            POST      grid/{id}/workers/{+workers id}
+添加更新指定网格被指派工单          POST      grid/{id}/workcards/{+workcards id }
+删除指定网格网格人员                DELETE   grid/{id}/workers/{+workers id}
+删除指定网格被指派工单              DELETE   grid/{id}/workcards/{+workcards id }
+获取指定网格动态网格人员            GET       grid/{id}/joined/workers
+获取指定网格历史所属分组变迁        GET       grid/{id}/history/assigned/groups
+获取指定网格历史参与分组变迁        GET       grid/{id}/history/joining/groups
+获取指定网格历史被指派工单          GET       grid/{id}/history/workcards/{+workcards id}
+
+网格工作流（申请加入、离开；审核同意、拒绝、更新）
+网格人员申请加入指定网格             GET      grid/{id}/apply/join/workers/{+workers id}    
+网格人员申请离开指定网格             GET      grid/{id}/apply/leave/workers/{+workers id}
+网格人员审核同意加入指定网格         GET      grid/{id}/review/join/workers/approve
+网格人员审核拒绝加入指定网格         GET      grid/{id}/review/join/workers/reject
+网格人员审核更新加入指定网格         GET      grid/{id}/review/join/workers/update
+网格人员审核同意离开指定网格         GET      grid/{id}/review/leave/workers/approve
+网格人员审核拒绝离开指定网格         GET      grid/{id}/review/leave/workers/reject
+网格人员审核更新离开指定网格         GET      grid/{id}/review/leave/workers/update
 
 
-网格人员服务：
+网格人员实体服务：workers
 
 获取在线/下线网格人员                GET     workers/status/{status}  //参考 网格人员在线状态
 获取指定工单可用网格人员             GET     workers/workcard/{workcard id}  //参考 工单网格人员匹配算法 
