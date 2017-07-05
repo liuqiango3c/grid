@@ -2,10 +2,13 @@
 
 关键字段
 employeeid: 雇员编号，根据企业雇员编号规则自动产生，或者批量导入数据
-attach：隶属组织部门
+label: 姓名，用于显示
+nickname:别称，
 contact: 联系方式：电话，email,等等。工作用的
 post: 雇佣岗位，worker等等
 jobs: 工作职责
 superior：上级  mapself,   
 subordinates: 下属  mapself ()
-address: 家庭住址，工作地址，服务区域
+office:办公室地址
+attach：    隶属部门  指向组织实体departments
+department：工作部门  指向组织实体departments
