@@ -29,7 +29,7 @@
        reserved（已预约）,
        scheduled(已计划)，
        installed（已安装）
-13.工单评价状态(comment)：commented（已评价）, commenting(待评价), 工单评价接口负责本状态更新。
+13.工单评价(comments)： 工单评价接口负责本状态更新。
 14.工单发起方（startup）：  order(订单系统), editor（人工编辑），CRM（客服发起）
 15.工单派发类型（when）：  presentable(即时派发), bookable(预约派发),
 16.工单派发模式（mode）：    {grabe(抢单模式), assign（指定模式）} (派发到大区的算哪种？)
