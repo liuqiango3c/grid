@@ -129,6 +129,8 @@
 获取指定网格奖项                    GET     grid/{id}/awards 
 获取指定网格的所属分组              GET      grid/{id}/assigned/groups
 获取指定网格的参与分组              GET      grid/{id}/joining/groups
+获取指定网格的指定服务区域          GET      grid/{id}/assigned/regions
+获取指定网格的自选服务区域          GET      grid/{id}/joining/regions
 获取指定网格的网格人员              GET      grid/{id}/workers?status={[online | offline ]}  //网格人员的在线状态通过查询（QUERY）status状态实现。
 获取指定网格被指派工单              GET      grid/{id}/workcards
 添加更新指定网格网格人员            POST      grid/{id}/workers/{+workers id}
