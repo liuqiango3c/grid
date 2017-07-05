@@ -2,27 +2,33 @@
 
 workcardid:工单号
 orderid:关联订单号 参考订单表 工单与订单之间的关系1:1, 1:N?
-status:总状态，根据逻辑可以判断工单的总状态，
+status:总状态，根据逻辑可以判断工单的总状态， 与udatetime配合可以直到每种状态的到大时间？
        new（新工单）, 
        dispatch(派单中),
        process（执行中）,
        done(完成),
        cancel(取消),
        suspend（挂起）。
-       与udatetime配合可以直到每种状态的到大时间？
+       
 dispatch：工单派单状态     
        idle(未派), 
        grabing（抢单模式派发）, 
-       assigning（指定模式派发） 
+       assigning（指定模式派发），
+       assigned （已派单）, //派给指定人，已经接收
+       grabed （已派单）,   //派给抢单，已被抢
+       
 feedback：工单派单反馈状态 
        idle(不需要)
        waiting（等待反馈）
        rejected（派发被拒绝）, 
-       assigned（成功派发）, 
-       grabed（被抢），
+       
 process： 工单执行状态
+       reserving(待预约)，
+       reserved（已预约）,
+       installed（已安装）
+
+comments：工单订户评价数量
 granularity：工单派发粒度
-comment：工单订户评价状态
 when：工单派发类型
 mode: 工单派发模式
 priority:工单优先级
