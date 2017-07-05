@@ -1,16 +1,16 @@
 关键字段
 
-workcardid:工单号
+workcardid:工单号，按照工单编号规范自动生成
 orderid:关联订单号 参考订单表 工单与订单之间的关系1:1, 1:N?
 status:总状态，根据逻辑可以判断工单的总状态， 与udatetime配合可以直到每种状态的到大时间？
        new（新工单）, 
-       dispatch(派单中),
-       process（执行中）,
-       done(完成),
-       cancel(取消),
-       suspend（挂起）。
+       dispatch(派单中), //工单第一次被派发时候，设置本态
+       process（执行中）, //工单被成功派单后（dispatch 设置为grabed,assigned时候），设置本态
+       done(完成),       //工单完成的设置根据完成判决策略 
+       cancel(取消),     //工单被强制取消的时候，需要完成工作流，只有满足特定条件才能取消
+       suspend（挂起）。  //工单被强制挂起的时候，需要完成工作流，只有满足特定条件才能挂起
        
-dispatch：工单派单状态     
+dispatch：工单派单状态     //当status为dispatch时候，使用本值状态。
        idle(未派), 
        grabing（抢单模式派发）, 
        assigning（指定模式派发），
@@ -21,7 +21,7 @@ dispatch：工单派单状态
 
 feedbacks: 反馈与原因等,包括派单反馈，执行过程中的各种反馈
 
-process： 工单执行状态
+process： 工单执行状态    //当status为process时候，使用本值状态。
        reserving(待预约)，
        reserved（已预约）,
        scheduled(已计划)，
