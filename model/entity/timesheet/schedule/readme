@@ -1,1 +1,13 @@
-排单实体
+排单实体：管理已经被安排的时间槽
+
+关键字段
+
+workerid
+timesheetid
+year
+month
+day
+stime
+etime
+duration
+workcardid
