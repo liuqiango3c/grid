@@ -16,18 +16,19 @@ dispatch：工单派单状态
        assigning（指定模式派发），
        assigned （已派单）, //派给指定人，已经接收
        grabed （已派单）,   //派给抢单，已被抢
-       
-feedback：工单派单反馈状态 
-       idle(不需要)
-       waiting（等待反馈）
        rejected（派发被拒绝）, 
-       
+       expired,超时无反馈
+
+feedbacks: 反馈与原因等,包括派单反馈，执行过程中的各种反馈
+
 process： 工单执行状态
        reserving(待预约)，
        reserved（已预约）,
+       scheduled(已计划)，
        installed（已安装）
 
 comments：工单订户评价数量
+retry： 派单重试次数
 granularity：工单派发粒度
 when：工单派发类型
 mode: 工单派发模式
@@ -36,12 +37,13 @@ startup：工单发起方
 cdatetime:工单生成时间 
 udatetime:最后更新时间
 ddatetime:最后派发时间，每次派发后更新，保留派单的时间
-dexpire:最后派发超时时间，每次派发后更新，为最后派发时间+超时时长。
-ftime:最后反馈时间，反馈时间减去最后派发时间的差值（单位S），工单被接收或者拒绝时间。
+edatetime:最后派发超时时间(expire)，每次派发后更新，为最后派发时间+超时时长。
+ftime:最后反馈间隔时间，反馈间隔时间减去最后派发时间的差值（单位S），工单被接收或者拒绝时间。
 
 单条记录只记录最后时间，历史操作记录通过revision获得。比如操作过程，状态迁移，派发历史等等。
 
 重发流程
-1 当dispatch状态为new时候，
+1 通过edatetime与当前时间比较的查询，edatetime<当前时间的表示超时，工单需要做超时处理
+2.
 
 
