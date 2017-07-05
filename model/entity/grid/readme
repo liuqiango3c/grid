@@ -1,5 +1,25 @@
 网格为网格化惯例的最小分组单位
 
+网格实体的关键属性
+
+gridid:网格编号
+name:  网格名称
+label: 网格别名
+logo:  网格LOGO
+description: 简要介绍
+area：隶属区域
+owners:  网格的负责人 ， 指向workers实体? employees?
+workers：网格内的成员 ， 指向workers实体
+events： 网格的事迹
+awards： 网格的奖项
+groups： 网格的分组标签， 引用网格分组（groups）作为标签属性
+      assign:所属分组
+      join： 加入分组
+regions: 服务区域，用于与工单地区匹配
+      assign：指定区域
+      join：自选区域
+workcards： 网格被分派的工单      
+
 
 网格的官方管理：
 
@@ -15,7 +35,6 @@
 4. 是否允许装维人员自己加入、离开其它网格      (Y）
 5. 是否考虑网格的集体绩效与考核               （O）
 6. 是否考虑网格的集体荣誉感                  （O）
-7. 是否考虑网格的历史变化过程                （O）
-8. 
+7. 是否考虑网格的历史变化过程                （O） 
 
 
