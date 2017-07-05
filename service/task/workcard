@@ -1,5 +1,17 @@
 #name:workcard
 #lable:派单服务
+
+关键字段：
+taskid：任务id
+assignedid：指派人id
+grabid：抢单人id
+stime：开始时间
+etime：结束时间
+taskstatus：任务状态   //rejected（被拒绝）, assigned（成功派发）, grabed（被抢）//睡眠（create）、就绪（ready）、运行（operate）、挂起（suspend）、中断（exit）
+
+
+
+
 1.启动派单服务                GET    task/workcard/start   
 2.停止派单服务                GET    task/workcard/stop
 3.配置派单服务                GET    task/workcard/config
