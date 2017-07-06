@@ -17,3 +17,34 @@ payments:     支付明细
 
 工单实体：订单产生、更新会调用工单实体服务，产生、更新新工单。
 
+
+
+ordertype：订单类型（预约单、即时单）
+ordersource：订单来源（营业厅、客户端、分销订单）
+
+buynername：订户姓名
+buyernumber：订户联系电话
+buyeradd：订户地址
+totalprice：订单金额
+discountprice：折扣金额
+finalprice：实付金额
+creattime：订单创建时间
+paytime：订单支付时间
+canceltime：订单取消时间
+settletime：结算时间
+paymethod：支付方式
+commission：佣金（若是分销订单则会产生佣金）
+comment：评价（订户对订单的评价）
+
+订单实体支持的表单
+
+订户：
+
+1.生成订单
+2.填写／修改订单信息
+3.删除订单
+4.评价订单
+
+网格人员
+1.生成订单（网格人员可以待下单）
+
