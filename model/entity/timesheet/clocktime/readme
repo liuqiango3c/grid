@@ -5,7 +5,7 @@ employeeid
 year
 month
 date
-根据当天第一次clockin时间并与该雇员的assign worktime进行比对，判断状态：迟到，早到，正常
+根据当天第一次clockin时间并与该雇员的assign worktime（排班表），schedule（排期表）进行比对，判断状态：迟到，早到，正常
 status: 考勤状态：正常(normal),迟到(later)，早退(advance)，旷工（absent）,(请假)vocation
 total：当日累计工作时间（s）
 
