@@ -4,9 +4,12 @@
 装维实体(worker)  <-- 雇员实体(employee) --> 
 网格实体(grid)
 
-考勤实体：clocktime
+
 排期实体：worktime
 日程实体：schedule
+
+雇员实体:(employee)
+考勤实体：clocktime
 
 实体关系描述
 
