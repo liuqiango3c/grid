@@ -1,15 +1,11 @@
 分区实体(area)
 区域实体（region）
-工单实体(workcard)
-装维实体(worker)  <-- 雇员实体(employee) --> 
+工单实体(workcard)<-- 订单实体（order）<-- 订户实体(subscriber)
+装维实体(worker)  <-- 雇员实体(employee) --> 考勤实体：clocktime
+                 <-- 日程实体：schedule
+                 <-- 排期实体：worktime
 网格实体(grid)
 
-
-排期实体：worktime
-日程实体：schedule
-
-雇员实体:(employee)
-考勤实体：clocktime
 
 实体关系描述
 
@@ -34,6 +30,11 @@ workcard  belongtoone       grid
 workcard  belongtoone       worker
 workcard  belongtoone       area
 workcard  belongtoone       region
+workcard  belongtoone       order
+workcard  hasOne            subscriber
+
+order     hasOne            workcard
+order     hasOne            subscriber
 
 employee  hasMany   clocktime
 employee  hasMany   worktime
