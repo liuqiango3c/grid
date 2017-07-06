@@ -12,3 +12,14 @@ subordinates: 下属  mapself ()
 office:办公室地址
 attach：    隶属部门  指向组织实体departments
 department：工作部门  指向组织实体departments
+age：年龄
+hiredate：入职时间
+resigndate：离职时间
+workyears：工作年限
+
+表单：
+新增雇员表单  //若雇员是导入的话就无此表单
+
+视图：
+雇员列表视图；
+下属列表视图
