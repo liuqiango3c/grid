@@ -1,0 +1,9 @@
+订户实体
+
+订户实体的关键属性
+subscriberid
+firstname
+surname
+addresses    //地址结构里包含了区域信息。
+
+
