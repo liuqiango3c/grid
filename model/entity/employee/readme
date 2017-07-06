@@ -3,23 +3,41 @@
 关键字段
 employeeid: 雇员编号，根据企业雇员编号规则自动产生，或者批量导入数据
 label: 姓名，用于显示
-nickname:别称，
-contact: 联系方式：电话，email,等等。工作用的
+nickname:别称
+gender：性别
+birthdate：出生日期
+age：年龄
 post: 雇佣岗位，worker等等
+phone：联系电话
+email：电子邮箱
+picture：照片
+maritalstatus：婚姻状态
+province：省份
+office:办公室地址
+city：城市
 jobs: 工作职责
 superior：上级  mapself,   
 subordinates: 下属  mapself ()
-office:办公室地址
 attach：    隶属部门  指向组织实体departments
 department：工作部门  指向组织实体departments
-age：年龄
+idtype：证件类型
+idnumber：证件号码
+password：密码
 hiredate：入职时间
 resigndate：离职时间
 workyears：工作年限
+kpiid：考勤编号
+blacklist：黑名单列表
+blackreason：黑名单原因
+remark：备注
+
 
 表单：
-新增雇员表单  //若雇员是导入的话就无此表单
+新增雇员表单；  //若雇员是导入的话就无此表单
+新增黑名单表单；
 
 视图：
 雇员列表视图；
-下属列表视图
+下属列表视图；
+黑名单列表视图
+
