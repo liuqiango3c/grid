@@ -35,6 +35,8 @@ workcard  hasOne            subscriber
 
 order     hasOne            workcard
 order     hasOne            subscriber
+order     hasMany           items
+order     hasOne            region
 
 employee  hasMany   clocktime
 employee  hasMany   worktime
