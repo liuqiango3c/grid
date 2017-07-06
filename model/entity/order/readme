@@ -2,7 +2,15 @@
 
 订单实体的关键属性：
 
-
+orderid： 订单号 （根据服务提供商的订单格式规范自动产生唯一）
+workcardid:   该订单对应工单号
+subscriberid: 该订单对应订户号
+items:        该订单对应商品清单
+timesheet:    该订单对应工期要求
+status：      订单状态：normal, pending, cancel, later, close
+stage：       订单阶段：点单、下单、支付、派单、执行、完成。
+bills:        订单结算信息：总价、税费、优惠、折扣等等
+payments:     支付明细
 
 订单实体关联实体
 
