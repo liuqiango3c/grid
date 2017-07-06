@@ -1,2 +1,20 @@
-管理雇员考勤的时间实体，与work
+管理雇员考勤的时间实体，与assign worktime 进行比对判断
+
+考勤总表:每次clockout触发 total+=(当前时间-clockin)
+employeeid
+year
+month
+date
+根据当天第一次clockin时间并与该雇员的assign worktime进行比对，判断状态：迟到，早到，正常
+status: 考勤状态：正常(normal),迟到(later)，早退(advance)，旷工（absent）,(请假)vocation
+total：当日累计工作时间（s）
+
+考勤明细关键字段:
+employeeid
+year
+month
+date：
+clockin： time  签入时间
+clockout: time  签出时间
+
 
