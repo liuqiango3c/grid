@@ -7,10 +7,22 @@ workcardid:   该订单对应工单号
 subscriberid: 该订单对应订户号
 items:        该订单对应商品清单
 timesheet:    该订单对应工期要求
+workerid：    该订单对应的装维人员
 status：      订单状态：normal, pending, cancel, later, close
 stage：       订单阶段：点单、下单、支付、派单、执行、完成。
 bills:        订单结算信息：总价、税费、优惠、折扣等等
 payments:     支付明细
+ordertype：订单类型（独立订单or分销订单）
+ordersource：订单来源（线上、客服、营业厅）
+vipnumber：会员卡号
+viptype：会员类型
+vipdiscount：会员折扣
+price：订单金额
+discount：优惠金额（折扣、代金券）
+actualpaid：实收金额
+cdatetime：创建时间
+paytpye：支付方式
+
 
 订单实体关联实体
 
