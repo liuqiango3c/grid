@@ -2,8 +2,14 @@
 
 订户实体的关键属性
 subscriberid
-firstname
-surname
+firstname    //可省略
+gender       //性别
+surname      //姓
 addresses    //地址结构里包含了区域信息。
+orders       //hasMany
+firstime: 首次消费时间
+lasttime: 上次消费时间
+expire:   服务到期时间，提前用户关怀
+total：   累计消费
 
 
