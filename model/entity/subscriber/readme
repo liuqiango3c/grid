@@ -6,6 +6,7 @@ firstname    //可省略
 gender       //性别
 surname      //姓
 profile：    //订户的详细个人信息
+contact：    //联系订户的方式，一般为电话。
 addresses    //地址结构里包含了区域信息。
 orders       //hasMany
 firstime: 首次消费时间
