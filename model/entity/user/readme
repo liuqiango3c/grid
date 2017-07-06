@@ -1,1 +1,7 @@
 用户中心实体
+
+用户关键属性
+
+userid:  用户ID
+loginid: 登录ID
+siteid： 登录站点ID
