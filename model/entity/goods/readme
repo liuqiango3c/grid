@@ -1,0 +1,52 @@
+
+goods 关键字段
+
+goodsid：商品id
+goodsname：商品名称
+goodsunit：商品单位
+sku：商品规格
+price：商品价格
+vipprice：会员价格
+maincategory：商品大类
+subcategory：商品小类
+goodsgroup：商品分组
+cdatetime：添加时间
+stock：商品库存
+description：商品描述
+goodstype：商品类型   （实物商品、虚拟商品、电子卡券）
+goodstatus：商品状态   （出售中 selling、  售罄中 sellout、 仓库中 warehouse）
+reviewstatus：审核状态    （待审核 reviewing  、  已审核reviewed）
+udatetime：更新时间
+image：商品图片
+thumpimg：商品缩略图
+sale：是否上架 （已上架 onsale 、 未上架 offsale）
+priority：商品排序
+validity ：商品有效期
+serialnumber：商品编码
+qrcode：商品二维码
+
+
+支持的表单
+
+网格人员&网格管理人员：
+添加／编辑商品
+删除商品
+添加／编辑商品分组
+删除商品分组
+上架商品
+下架商品
+生成商品二维码
+
+订户：
+分享商品二维码
+
+
+支持的视图
+
+网格人员&网格管理人员：
+查询商品  （查询条件：商品大类、小类、商品分组、商品类型、商品状态、审核状态、关键词）
+查看商品详情
+
+订户：
+查询商品
+查看商品详情
