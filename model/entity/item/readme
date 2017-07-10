@@ -1,20 +1,20 @@
 
-goods 关键字段
+items 关键字段
 
-goodsid：商品id
-goodsname：商品名称
-goodsunit：商品单位
+itemid：商品id
+itemname：商品名称
+itemunit：商品单位
 sku：商品规格
 price：商品价格
 vipprice：会员价格
 maincategory：商品大类
 subcategory：商品小类
-goodsgroup：商品分组
+itemgroup：商品分组
 cdatetime：添加时间
 stock：商品库存
 description：商品描述
-goodstype：商品类型   （实物商品、虚拟商品、电子卡券）
-goodstatus：商品状态   （出售中 selling、  售罄中 sellout、 仓库中 warehouse）
+itemtype：商品类型   （实物商品、虚拟商品、电子卡券）
+itemtatus：商品状态   （出售中 selling、  售罄中 sellout、 仓库中 warehouse）
 reviewstatus：审核状态    （待审核 reviewing  、  已审核reviewed）
 udatetime：更新时间
 image：商品图片
