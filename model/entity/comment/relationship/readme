@@ -1,0 +1,8 @@
+
+评论的关系
+
+comment        belongtoOne      subscriber
+comment        1:1              order
+comment        1:1              workcard
+comment        bolongtoOne      worker
+comment        hasMany          item
