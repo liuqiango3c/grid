@@ -2,9 +2,43 @@
 
 用户实体关键属性
 
-
-
-
 userid:  用户ID
 loginid: 登录ID
 siteid： 登录站点ID
+
+
+
+nickname：昵称
+username：用户名
+headphoto：头像
+phone：联系电话
+password：密码
+logintime：注册时间
+updatetime：更新时间
+status：状态   （停用 disable  、未停用 able）
+
+支持的表单
+
+管理人员：
+添加／修改用户
+修改用户密码
+删除用户
+
+非管理人员：
+提交注册信息
+登录
+登出
+修改密码
+修改手机号
+添加／修改头像
+
+
+支持的视图
+
+管理人员：
+查询用户
+查看用户详细信息
+
+非管理人员：
+查看基本信息
+删除头像
