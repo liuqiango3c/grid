@@ -15,3 +15,47 @@ expire:   服务到期时间，提前用户关怀
 total：   累计消费
 
 
+
+phone：手机号
+picture：头像
+credit：积分
+creditdetails：积分明细
+addtime：加入时间
+updatetime：更新时间
+amouny：账户余额
+coupon：优惠券
+purchasetimes：购买次数
+totalprice：累计购买金额
+collection：收藏
+password：密码
+distributor：订户发展的分销人
+distributorder：订户发展的分销订单
+commision：分销佣金
+
+
+支持的表单：（角色为订户）
+提交注册信息
+登录
+登出
+修改密码
+修改手机号
+添加／修改头像
+添加／修改地址	
+删除地址
+添加／修改收藏
+删除收藏
+发起分销
+
+
+支持的视图：（角色为订户）
+查看订户基本信息
+登录
+修改密码
+收货地址列表
+积分数&积分明细
+积分权益对照表
+优惠券列表 & 详情
+收藏列表 & 详情
+查询已发展的分销人列表
+查询已发展的分销订单列表
+
