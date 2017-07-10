@@ -19,3 +19,49 @@ clockin： time  签入时间
 clockout: time  签出时间
 
 
+
+employeeid：雇员id
+clockip：签到地点
+clockgroup：考勤组
+leaveapply：请假申请
+leaventime：请假时间
+duration：请假时长
+leavereason：请假原因
+reviewer：审核人
+status：审批状态 （待审核 reviewing、审核通过approval、 审核拒绝rejected）
+clockday：出勤天数
+unclockday：未出勤天数
+cdatetime：添加时间
+udatetime：更新时间
+times：打卡次数
+
+支持的表单
+
+网格人员：
+添加／修改签入时间
+添加／修改签出时间
+添加／修改请假申请
+删除请假申请
+
+网格经理：
+审核所管理的网格人员的请假申请
+添加／修改考核组（审批条件）
+删除考勤组
+
+
+支持的视图
+
+网格人员：
+查询打卡记录
+查看打卡明细
+查询请假申请
+查看请假申请审核结果
+
+网格管理人员：
+查看所管理网格人员的请假申请列表
+查询所管理网格人员的打卡记录
+查询所管理网格人员的请假记录
+查看所管理网格人员的请假信息
+所管理网格人员的审批条件列表
+
+
