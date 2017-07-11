@@ -1,32 +1,32 @@
 
-获取订单列表	               GET	   orders
-获取指定来源订单列表	        GET	    orders/source/{source}   // 来源于营业厅、客户端、分销
-获取指定类型订单列表	        GET	    orders/type/{type}   // 类型包括及时单、预约单
-获取指定状态订单列表    	    GET	    orders/status/{status}  // 待付款、待接单、待安装、待评价、已完成
-获取指定时间订单列表	        GET	    orders/datetime/{year}/{month}/{date}/{time}
-获取指定日期订单列表	        GET	     orders/date/{year}/{month}/{date}
-获取指定支付方式订单列表	     GET	   orders/paymethod/{paymethod}
-获取指定支付结果订单列表	     GET	   orders/payresult/{payresult}
-获取指定地理位置附近订单列表	 GET	   orders/geo/radius/{radius}
-获取指定订单位置相近订单列表   GET	   orders/geo/order/{orderid}
-获取按时间日期订单统计信息	    GET	    orders/statistic/time/{yaer}/{month}/{date}/{time}
-获取指定订单信息             	GET	    order/{id}
-获取指定订单类型来源	        GET	    order/{id}/source
-获取指定订单类型	            GET	    order/{id}/type
-获取指定订单状态            	GET	    order/{id}/status
-获取指定订单金额            	GET	    order/{id}/price
-获取指定订单支付方式        	GET	    order/{id}/paymethod
-获取指定订单产生的佣金        GET	   order/{id}/commission
-获取指定订单订户评价相关信息	 GET	   order/{id}/comment
-获取指定订单支付结果	        GET	    order/{id}/payresult
-获取指定订单地理位置	        GET	    order/{id}/geo/radius
+获取订单列表	                GET	orders
+获取指定来源订单列表	     GET     orders/source/{source}   // 来源于营业厅、客户端、分销
+获取指定类型订单列表	     GET     orders/type/{type}   // 类型包括及时单、预约单
+获取指定状态订单列表    	     GET     orders/status/{status}  // 待付款、待接单、待安装、待评价、已完成
+获取指定时间订单列表	     GET     orders/datetime/{year}/{month}/{date}/{time}
+获取指定日期订单列表	     GET     orders/date/{year}/{month}/{date}
+获取指定支付方式订单列表	   GET	   orders/paymethod/{paymethod}
+获取指定支付结果订单列表	   GET	   orders/payresult/{payresult}
+获取指定地理位置附近订单列表	 GET	 orders/geo/radius/{radius}
+获取指定订单位置相近订单列表   GET	 orders/geo/order/{orderid}
+获取按时间日期订单统计信息	  GET	  orders/statistic/time/{yaer}/{month}/{date}/{time}
+获取指定订单信息              GET     order/{id}
+获取指定订单类型来源	    GET	    order/{id}/source
+获取指定订单类型	      GET     order/{id}/type
+获取指定订单状态              GET     order/{id}/status
+获取指定订单金额              GET     order/{id}/price
+获取指定订单支付方式          GET	    order/{id}/paymethod
+获取指定订单产生的佣金        GET	    order/{id}/commission
+获取指定订单订户评价相关信息	 GET	 order/{id}/comment
+获取指定订单支付结果	    GET	    order/{id}/payresult
+获取指定订单地理位置	    GET	    order/{id}/geo/radius
 		
-生成订单	               POST	    order
-修改指定订单状态	       POST	     order/{id}/status
-修改指定订单产生的佣金	   POST	    order/{id}/commission
-对指定订单进行评价	       POST	    order/{id}/comment
-修改指定订单地理位置	    POST	   order/{id}/geo/radius
+生成订单	                 POST	 order
+修改指定订单状态	      POST    order/{id}/status
+修改指定订单产生的佣金	   POST	   order/{id}/commission
+对指定订单进行评价	     POST    order/{id}/comment
+修改指定订单地理位置	    POST     order/{id}/geo/radius
 		
-删除指定订单	           DELETE	   order/{id}
-删除订户对指定订单的评价	DELETE	  order/{id}/comment
-删除指定订单产生的佣金	   DELETE	   order/{id}/commission
+删除指定订单	               DELETE	 order/{id}
+删除订户对指定订单的评价	  DELETE    order/{id}/comment
+删除指定订单产生的佣金	   DELETE    order/{id}/commission
