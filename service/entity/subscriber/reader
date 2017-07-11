@@ -1,0 +1,26 @@
+
+获取指定订户基本信息	    GET	   subscriber/{id}
+获取指定订户地址信息	    GET	   subscriber/{id}/address
+获取指定订户积分	        GET	   subscriber/{id}/credit
+获取指定订户积分明细	    GET	   subscriber/{id}/creditdetails
+获取指定订户账户余额	    GET	   subscriber/{id}/amount
+获取指定订户余额明细	    GET	   subscriber/{id}/amountdetails
+获取指定订户提现申请	    GET	   subscriber/{id}/cashapply
+获取指定订户提现历史	    GET	   subscriber/{id}/cashapply/history
+获取指定订户优惠券列表  	 GET	   subscriber/{id}/coupons
+获取指定订户优惠券详情	   GET	   subscriber/{id}/coupon
+获取指定订户购买次数	    GET	   subscriber/{id}/purchasetime
+获取指定订户累计购买金额	GET	   subscriber/{id}/totalprice
+获取指定订户订单列表	    GET	   subscriber/{id}/orders
+获取指定订户订单详情	    GET	   subscriber/{id}/order
+获取指定订户发展订户列表	GET	   subscriber/{id}/market/subscribers
+获取指定订户发展订单列表	GET	   subscriber/{id}/market/orders
+获取指定订户收藏列表	    GET    subscriber/{id}/collections
+		
+添加／更新指定订户地址信息	POST   subscriber/{id}/address
+添加／更新指定订户积分	   POST   subscriber/{id}/credit
+添加／更新指定订户优惠券	POST   subscriber/{id}/coupons
+		
+删除指定订户地址信息	   DELETE  subscriber/{id}/address
+删除指定订户积分	       DELETE	 subscriber/{id}/credit
+删除指定订户优惠券     	DELETE	subscriber/{id}/coupons
