@@ -1,0 +1,17 @@
+
+
+获取购物车列表         	 GET	 carts
+获取指定购物车基本信息   	GET	  cart/{id}
+获取指定购物车商品信息	    GET	  cart/{id}/items
+获取指定购物车商品金额	    GET	  cart/{id}/price
+获取指定购物车商品优惠金额	GET	  cart/{id}/discount
+获取指定购物车可用优惠券	 GET	 cart/{id}/coupons
+获取指定购物车商品状态	    GET	  cart/{id}/items/status     //商品状态：出售中、售罄中、 仓库中（未上架）
+获取指定购物车商品库存	    GET	  cart/{id}/items/stock    
+		
+添加／更新指定购物车的商品	       POST	  cart/{id}/items
+添加／更新指定购物车的可用优惠券	POST	 cart/{id}/coupons
+购物车结算	                     POST  	cart/{id}/settlement
+		
+删除指定购物车商品	             DELETE	 cart/{id}/items
+删除指定购物车优惠券	          DELETE	 cart/{id}/coupons
