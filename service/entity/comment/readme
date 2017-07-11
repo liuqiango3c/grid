@@ -1,0 +1,18 @@
+
+
+
+获取评论列表	               GET    comments
+获取指定时间评论列表	        GET	   comments/datetime/{year}/{month}/{date}/{time}
+获取指定日期评论列表	        GET	   comments/date/{year}/{month}/{date}
+获取指定状态评论列表	        GET    comments/date/{year}/{month}/{date}
+获取指定评论详细信息	        GET    comment/{id}
+获取指定评论的订户	           GET	   comment/{id}/subscribers
+获取指定评论的订单	           GET	   comment/{id}/subscribers
+获取指定评论指定工单的网格人员	GET	   comment/{id}/{workercard}/workers
+获取指定评论指定网格人员的工单	GET	   comment/{id}/{worker}/workercards
+		
+添加／更新订户对订单的评论	    POST   comment/{id}/{subscriber}/{order}
+添加／更新网格人员对订户的评论	POST   comment/{id}/{subscriber}/{order}
+		
+删除订户对订单的评论	        DELETE	comment/{id}/{subscriber}/{order}
+删除网格人员对订户的评论	    DELETE	comment/{id}/{subscriber}/{order}
